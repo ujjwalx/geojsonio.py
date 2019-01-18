@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 import argparse
 import json
 import sys
 import webbrowser
+import getpass
 
 import github3
 import six
@@ -36,6 +37,8 @@ def display(contents, domain=DEFAULT_DOMAIN, force_gist=False):
     url = make_url(contents, domain, force_gist)
     webbrowser.open(url)
     return url
+
+
 # display() used to be called to_geojsonio. Keep it around for now...
 to_geojsonio = display
 
@@ -167,7 +170,10 @@ def _make_gist(contents, description='', filename='data.geojson'):
     contents
 
     """
-    ghapi = github3.GitHub()
+    print("A GH Gist needs to be created. Please supply your GH credentials.")
+    username = input('Github Username : ')
+    password = getpass.getpass('Github Password : ')
+    ghapi = github3.login(username=username, password=password)
     files = {filename: {'content': contents}}
     gist = ghapi.create_gist(description, files)
 
@@ -216,6 +222,7 @@ def main():
         print(url)
     else:
         webbrowser.open(url)
+
 
 if __name__ == '__main__':
     main()
