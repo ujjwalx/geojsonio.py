@@ -1,13 +1,13 @@
 from __future__ import unicode_literals
 
 import json
+
+import pytest
 from six.moves import urllib
 
 import geojsonio
 import github3
-
 import mock
-import pytest
 
 
 @pytest.fixture

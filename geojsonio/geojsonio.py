@@ -3,14 +3,15 @@
 from __future__ import unicode_literals
 
 import argparse
+import getpass
 import json
 import sys
 import webbrowser
-import getpass
 
-import github3
 import six
 from six.moves import urllib
+
+import github3
 
 MAX_URL_LEN = 150e3  # Size threshold above which a gist is created
 DEFAULT_DOMAIN = 'http://geojson.io/'
